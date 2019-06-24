@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/C++/WOW/test/wow2.cc.html</title>
+<meta name="Generator" content="Vim/8.1">
+<meta name="plugin-version" content="vim8.1_v1">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="number_lines,use_css,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
+<meta name="colorscheme" content="onedark">
+<style type="text/css">
+<!--
+pre { font-family: monospace; color: #afafaf; background-color: #262626; }
+body { font-family: monospace; color: #afafaf; background-color: #262626; }
+* { font-size: 1em; }
+.String { color: #87d787; }
+.Number { color: #d7875f; }
+.Label { color: #d75fd7; }
+.LineNr { color: #444444; }
+.Function { color: #00afff; }
+.Type { color: #d7af87; }
+.Include { color: #00afff; }
+.Typedef { color: #d7af87; }
+.Conditional { color: #d75fd7; }
+.Statement { color: #d75fd7; }
+.Float { color: #d7875f; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  var lineElem = document.getElementById(lineNum);
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<pre id='vimCodeElement'>
+<span id="L1" class="LineNr">  1 </span><span class="Include">#include </span><span class="String">&quot;wow2.h&quot;</span>
+<span id="L2" class="LineNr">  2 </span><span class="Type">void</span> Headquarter::<span class="Function">CreateDragon</span>()
+<span id="L3" class="LineNr">  3 </span>{
+<span id="L4" class="LineNr">  4 </span>    <span class="Type">int</span> n = _time+<span class="Number">1</span>;
+<span id="L5" class="LineNr">  5 </span>    _hp -= _dragonHp;
+<span id="L6" class="LineNr">  6 </span>    ++_dragon;
+<span id="L7" class="LineNr">  7 </span>    <span class="Typedef">string</span> weapon;
+<span id="L8" class="LineNr">  8 </span>    <span class="Type">int</span> ret = n%<span class="Number">3</span>;
+<span id="L9" class="LineNr">  9 </span>    <span class="Conditional">if</span>(ret==<span class="Number">0</span>) weapon=<span class="String">&quot;sword&quot;</span>;
+<span id="L10" class="LineNr"> 10 </span>    <span class="Conditional">else</span> <span class="Conditional">if</span>(ret==<span class="Number">1</span>) weapon=<span class="String">&quot;bomb&quot;</span>;
+<span id="L11" class="LineNr"> 11 </span>    <span class="Conditional">else</span> weapon=<span class="String">&quot;arrow&quot;</span>;
+<span id="L12" class="LineNr"> 12 </span>    <span class="Type">double</span> morale = <span class="Float">1.0</span>*_hp/<span class="Number">3</span>;
+<span id="L13" class="LineNr"> 13 </span>    Dragon <span class="Function">dragon</span>(n,_dragonHp,weapon,morale);
+<span id="L14" class="LineNr"> 14 </span>    <span class="Function">printf</span>(<span class="String">&quot;</span>%03d<span class="String"> </span>%s<span class="String"> dragon </span>%d<span class="String"> born with strength </span>%d<span class="String">,</span>%d<span class="String"> dragon in </span>%s<span class="String"> headquarter</span>\n<span class="String">&quot;</span>,_time,_color.<span class="Function">c_str</span>(),n,_dragonHp,_dragon,_color.<span class="Function">c_str</span>());
+<span id="L15" class="LineNr"> 15 </span>    dragon.<span class="Function">display</span>();
+<span id="L16" class="LineNr"> 16 </span>    _time = n;
+<span id="L17" class="LineNr"> 17 </span>}
+<span id="L18" class="LineNr"> 18 </span>
+<span id="L19" class="LineNr"> 19 </span><span class="Type">void</span> Headquarter::<span class="Function">CreateNinja</span>()
+<span id="L20" class="LineNr"> 20 </span>{
+<span id="L21" class="LineNr"> 21 </span>    <span class="Type">int</span> n = _time+<span class="Number">1</span>;
+<span id="L22" class="LineNr"> 22 </span>    _hp -= _ninjaHp;
+<span id="L23" class="LineNr"> 23 </span>    ++_ninja;
+<span id="L24" class="LineNr"> 24 </span>    <span class="Typedef">string</span> weapon1;
+<span id="L25" class="LineNr"> 25 </span>    <span class="Typedef">string</span> weapon2;
+<span id="L26" class="LineNr"> 26 </span>    <span class="Type">int</span> ret1 = n%<span class="Number">3</span>;
+<span id="L27" class="LineNr"> 27 </span>    <span class="Type">int</span> ret2 = (n+<span class="Number">1</span>)%<span class="Number">3</span>;
+<span id="L28" class="LineNr"> 28 </span>    <span class="Conditional">if</span>(ret1==<span class="Number">0</span>) weapon1=<span class="String">&quot;sword&quot;</span>;
+<span id="L29" class="LineNr"> 29 </span>    <span class="Conditional">else</span> <span class="Conditional">if</span>(ret1==<span class="Number">1</span>) weapon1=<span class="String">&quot;bomb&quot;</span>;
+<span id="L30" class="LineNr"> 30 </span>    <span class="Conditional">else</span> weapon1=<span class="String">&quot;arrow&quot;</span>;
+<span id="L31" class="LineNr"> 31 </span>    <span class="Conditional">if</span>(ret2==<span class="Number">0</span>) weapon2=<span class="String">&quot;sword&quot;</span>;
+<span id="L32" class="LineNr"> 32 </span>    <span class="Conditional">else</span> weapon2=<span class="String">&quot;bomb&quot;</span>;
+<span id="L33" class="LineNr"> 33 </span>    <span class="Conditional">if</span>(ret2==<span class="Number">2</span>) weapon2=<span class="String">&quot;arrow&quot;</span>;
+<span id="L34" class="LineNr"> 34 </span>    Ninja <span class="Function">ninja</span>(n,_ninjaHp,weapon1,weapon2);
+<span id="L35" class="LineNr"> 35 </span>    <span class="Function">printf</span>(<span class="String">&quot;</span>%03d<span class="String"> </span>%s<span class="String"> ninja </span>%d<span class="String"> born with strength </span>%d<span class="String">,</span>%d<span class="String"> ninja in </span>%s<span class="String"> headquarter</span>\n<span class="String">&quot;</span>,_time,_color.<span class="Function">c_str</span>(),n,_ninjaHp,_ninja,_color.<span class="Function">c_str</span>());
+<span id="L36" class="LineNr"> 36 </span>    ninja.<span class="Function">display</span>();
+<span id="L37" class="LineNr"> 37 </span>    _time = n;
+<span id="L38" class="LineNr"> 38 </span>}
+<span id="L39" class="LineNr"> 39 </span>
+<span id="L40" class="LineNr"> 40 </span><span class="Type">void</span> Headquarter::<span class="Function">CreateIceman</span>()
+<span id="L41" class="LineNr"> 41 </span>{
+<span id="L42" class="LineNr"> 42 </span>    <span class="Type">int</span> n = _time+<span class="Number">1</span>;
+<span id="L43" class="LineNr"> 43 </span>    _hp -= _icemanHp;
+<span id="L44" class="LineNr"> 44 </span>    ++_iceman;
+<span id="L45" class="LineNr"> 45 </span>    <span class="Typedef">string</span> weapon;
+<span id="L46" class="LineNr"> 46 </span>    <span class="Type">int</span> ret = n%<span class="Number">3</span>;
+<span id="L47" class="LineNr"> 47 </span>    <span class="Conditional">if</span>(ret==<span class="Number">0</span>) weapon=<span class="String">&quot;sword&quot;</span>;
+<span id="L48" class="LineNr"> 48 </span>    <span class="Conditional">else</span> <span class="Conditional">if</span>(ret==<span class="Number">1</span>) weapon=<span class="String">&quot;bomb&quot;</span>;
+<span id="L49" class="LineNr"> 49 </span>    <span class="Conditional">else</span> weapon=<span class="String">&quot;arrow&quot;</span>;
+<span id="L50" class="LineNr"> 50 </span>    Iceman <span class="Function">iceman</span>(n,_icemanHp,weapon);
+<span id="L51" class="LineNr"> 51 </span>    <span class="Function">printf</span>(<span class="String">&quot;</span>%03d<span class="String"> </span>%s<span class="String"> iceman </span>%d<span class="String"> born with strength </span>%d<span class="String">,</span>%d<span class="String"> iceman in </span>%s<span class="String"> headquarter</span>\n<span class="String">&quot;</span>,_time,_color.<span class="Function">c_str</span>(),n,_icemanHp,_iceman,_color.<span class="Function">c_str</span>());
+<span id="L52" class="LineNr"> 52 </span>    iceman.<span class="Function">display</span>();
+<span id="L53" class="LineNr"> 53 </span>    _time = n;
+<span id="L54" class="LineNr"> 54 </span>}
+<span id="L55" class="LineNr"> 55 </span>
+<span id="L56" class="LineNr"> 56 </span><span class="Type">void</span> Headquarter::<span class="Function">CreateLion</span>()
+<span id="L57" class="LineNr"> 57 </span>{
+<span id="L58" class="LineNr"> 58 </span>    <span class="Type">int</span> n = _time+<span class="Number">1</span>;
+<span id="L59" class="LineNr"> 59 </span>    _hp -= _lionHp;
+<span id="L60" class="LineNr"> 60 </span>    ++_lion;
+<span id="L61" class="LineNr"> 61 </span>    <span class="Type">int</span> loyalty = _hp;
+<span id="L62" class="LineNr"> 62 </span>    Lion <span class="Function">lion</span>(n,_lionHp,loyalty);
+<span id="L63" class="LineNr"> 63 </span>    <span class="Function">printf</span>(<span class="String">&quot;</span>%03d<span class="String"> </span>%s<span class="String"> lion </span>%d<span class="String"> born with strength </span>%d<span class="String">,</span>%d<span class="String"> lion in </span>%s<span class="String"> headquarter</span>\n<span class="String">&quot;</span>,_time,_color.<span class="Function">c_str</span>(),n,_lionHp,_lion,_color.<span class="Function">c_str</span>());
+<span id="L64" class="LineNr"> 64 </span>    lion.<span class="Function">display</span>();
+<span id="L65" class="LineNr"> 65 </span>    _time = n;
+<span id="L66" class="LineNr"> 66 </span>}
+<span id="L67" class="LineNr"> 67 </span>
+<span id="L68" class="LineNr"> 68 </span><span class="Type">void</span> Headquarter::<span class="Function">CreateWolf</span>()
+<span id="L69" class="LineNr"> 69 </span>{
+<span id="L70" class="LineNr"> 70 </span>    <span class="Type">int</span> n = _time+<span class="Number">1</span>;
+<span id="L71" class="LineNr"> 71 </span>    _hp -= _wolfHp;
+<span id="L72" class="LineNr"> 72 </span>    ++_wolf;
+<span id="L73" class="LineNr"> 73 </span>    Wolf <span class="Function">wolf</span>(n,_wolfHp);
+<span id="L74" class="LineNr"> 74 </span>    <span class="Function">printf</span>(<span class="String">&quot;</span>%03d<span class="String"> </span>%s<span class="String"> wolf </span>%d<span class="String"> born with strength </span>%d<span class="String">,</span>%d<span class="String"> wolf in </span>%s<span class="String"> headquarter</span>\n<span class="String">&quot;</span>,_time,_color.<span class="Function">c_str</span>(),n,_wolfHp,_wolf,_color.<span class="Function">c_str</span>());
+<span id="L75" class="LineNr"> 75 </span>    _time = n;
+<span id="L76" class="LineNr"> 76 </span>}
+<span id="L77" class="LineNr"> 77 </span>
+<span id="L78" class="LineNr"> 78 </span><span class="Type">void</span> Headquarter::<span class="Function">Create</span>()
+<span id="L79" class="LineNr"> 79 </span>{
+<span id="L80" class="LineNr"> 80 </span>    <span class="Conditional">if</span>(_flag==-<span class="Number">3</span>) <span class="Statement">return</span>;
+<span id="L81" class="LineNr"> 81 </span>    <span class="Conditional">if</span>(_color==<span class="String">&quot;red&quot;</span>){
+<span id="L82" class="LineNr"> 82 </span>        <span class="Conditional">if</span>(_flag!=-<span class="Number">1</span>){
+<span id="L83" class="LineNr"> 83 </span>            <span class="Type">int</span> ret;
+<span id="L84" class="LineNr"> 84 </span>            <span class="Conditional">if</span>(_flag!=-<span class="Number">2</span>) ret = _flag;
+<span id="L85" class="LineNr"> 85 </span>            <span class="Conditional">else</span> ret = _time % <span class="Number">5</span>;
+<span id="L86" class="LineNr"> 86 </span>            <span class="Conditional">switch</span>(ret)
+<span id="L87" class="LineNr"> 87 </span>            {
+<span id="L88" class="LineNr"> 88 </span>                <span class="Label">case</span> <span class="Number">0</span> :
+<span id="L89" class="LineNr"> 89 </span>                    <span class="Conditional">if</span>(_hp &lt; _icemanHp){
+<span id="L90" class="LineNr"> 90 </span>                        <span class="Conditional">if</span>(_hp &gt;= _lionHp) _flag = <span class="Number">1</span>;
+<span id="L91" class="LineNr"> 91 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _wolfHp) _flag = <span class="Number">2</span>;
+<span id="L92" class="LineNr"> 92 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _ninjaHp) _flag = <span class="Number">3</span>;
+<span id="L93" class="LineNr"> 93 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _dragonHp) _flag = <span class="Number">4</span>;
+<span id="L94" class="LineNr"> 94 </span>                        <span class="Conditional">else</span> _flag = -<span class="Number">1</span>;
+<span id="L95" class="LineNr"> 95 </span>                    }<span class="Conditional">else</span>{
+<span id="L96" class="LineNr"> 96 </span>                        <span class="Function">CreateIceman</span>();
+<span id="L97" class="LineNr"> 97 </span>                        _flag = -<span class="Number">2</span>;
+<span id="L98" class="LineNr"> 98 </span>                    }<span class="Statement">break</span>;
+<span id="L99" class="LineNr"> 99 </span>                <span class="Label">case</span> <span class="Number">1</span> :
+<span id="L100" class="LineNr">100 </span>                    <span class="Conditional">if</span>(_hp &lt; _lionHp){
+<span id="L101" class="LineNr">101 </span>                        <span class="Conditional">if</span>(_hp &gt;= _wolfHp) _flag = <span class="Number">2</span>;
+<span id="L102" class="LineNr">102 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _ninjaHp) _flag = <span class="Number">3</span>;
+<span id="L103" class="LineNr">103 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _dragonHp) _flag = <span class="Number">4</span>;
+<span id="L104" class="LineNr">104 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _icemanHp) _flag = <span class="Number">0</span>;
+<span id="L105" class="LineNr">105 </span>                        <span class="Conditional">else</span> _flag = -<span class="Number">1</span>;
+<span id="L106" class="LineNr">106 </span>                    }<span class="Conditional">else</span>{
+<span id="L107" class="LineNr">107 </span>                        <span class="Function">CreateLion</span>();
+<span id="L108" class="LineNr">108 </span>                        _flag = -<span class="Number">2</span>;
+<span id="L109" class="LineNr">109 </span>                    }<span class="Statement">break</span>;
+<span id="L110" class="LineNr">110 </span>                <span class="Label">case</span> <span class="Number">2</span> :
+<span id="L111" class="LineNr">111 </span>                    <span class="Conditional">if</span>(_hp &lt; _wolfHp){
+<span id="L112" class="LineNr">112 </span>                        <span class="Conditional">if</span>(_hp &gt;= _ninjaHp) _flag = <span class="Number">3</span>;
+<span id="L113" class="LineNr">113 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _dragonHp) _flag = <span class="Number">4</span>;
+<span id="L114" class="LineNr">114 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _icemanHp) _flag = <span class="Number">0</span>;
+<span id="L115" class="LineNr">115 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _lionHp) _flag = <span class="Number">1</span>;
+<span id="L116" class="LineNr">116 </span>                        <span class="Conditional">else</span> _flag = -<span class="Number">1</span>;
+<span id="L117" class="LineNr">117 </span>                    }<span class="Conditional">else</span>{
+<span id="L118" class="LineNr">118 </span>                        <span class="Function">CreateWolf</span>();
+<span id="L119" class="LineNr">119 </span>                        _flag = -<span class="Number">2</span>;
+<span id="L120" class="LineNr">120 </span>                    }<span class="Statement">break</span>;
+<span id="L121" class="LineNr">121 </span>                <span class="Label">case</span> <span class="Number">3</span> :
+<span id="L122" class="LineNr">122 </span>                    <span class="Conditional">if</span>(_hp &lt; _ninjaHp){
+<span id="L123" class="LineNr">123 </span>                        <span class="Conditional">if</span>(_hp &gt;= _dragonHp) _flag = <span class="Number">4</span>;
+<span id="L124" class="LineNr">124 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _icemanHp) _flag = <span class="Number">0</span>;
+<span id="L125" class="LineNr">125 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _lionHp) _flag = <span class="Number">1</span>;
+<span id="L126" class="LineNr">126 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _wolfHp) _flag = <span class="Number">2</span>;
+<span id="L127" class="LineNr">127 </span>                        <span class="Conditional">else</span> _flag = -<span class="Number">1</span>;
+<span id="L128" class="LineNr">128 </span>                    }<span class="Conditional">else</span>{
+<span id="L129" class="LineNr">129 </span>                        <span class="Function">CreateNinja</span>();
+<span id="L130" class="LineNr">130 </span>                        _flag = -<span class="Number">2</span>;
+<span id="L131" class="LineNr">131 </span>                    }<span class="Statement">break</span>;
+<span id="L132" class="LineNr">132 </span>                <span class="Label">case</span> <span class="Number">4</span> :
+<span id="L133" class="LineNr">133 </span>                    <span class="Conditional">if</span>(_hp &lt; _dragonHp){
+<span id="L134" class="LineNr">134 </span>                        <span class="Conditional">if</span>(_hp &gt;= _icemanHp) _flag = <span class="Number">0</span>;
+<span id="L135" class="LineNr">135 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _lionHp) _flag = <span class="Number">1</span>;
+<span id="L136" class="LineNr">136 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _wolfHp) _flag = <span class="Number">2</span>;
+<span id="L137" class="LineNr">137 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _ninjaHp) _flag = <span class="Number">3</span>;
+<span id="L138" class="LineNr">138 </span>                        <span class="Conditional">else</span> _flag = -<span class="Number">1</span>;
+<span id="L139" class="LineNr">139 </span>                    }<span class="Conditional">else</span>{
+<span id="L140" class="LineNr">140 </span>                        <span class="Function">CreateDragon</span>();
+<span id="L141" class="LineNr">141 </span>                        _flag = -<span class="Number">2</span>;
+<span id="L142" class="LineNr">142 </span>                    }<span class="Statement">break</span>;
+<span id="L143" class="LineNr">143 </span>            }
+<span id="L144" class="LineNr">144 </span>            <span class="Conditional">if</span>(_flag==-<span class="Number">1</span>){
+<span id="L145" class="LineNr">145 </span>                <span class="Function">printf</span>(<span class="String">&quot;</span>%03d<span class="String"> </span>%s<span class="String"> headquarter stops making warriors</span>\n<span class="String">&quot;</span>,_time,_color.<span class="Function">c_str</span>());
+<span id="L146" class="LineNr">146 </span>                _flag = -<span class="Number">3</span>;
+<span id="L147" class="LineNr">147 </span>            }
+<span id="L148" class="LineNr">148 </span>        }
+<span id="L149" class="LineNr">149 </span>    }
+<span id="L150" class="LineNr">150 </span>
+<span id="L151" class="LineNr">151 </span>    <span class="Conditional">else</span> <span class="Conditional">if</span>(_color==<span class="String">&quot;blue&quot;</span>){
+<span id="L152" class="LineNr">152 </span>        <span class="Conditional">if</span>(_flag!=-<span class="Number">1</span>){
+<span id="L153" class="LineNr">153 </span>            <span class="Type">int</span> ret;
+<span id="L154" class="LineNr">154 </span>            <span class="Conditional">if</span>(_flag!=-<span class="Number">2</span>) ret = _flag;
+<span id="L155" class="LineNr">155 </span>            <span class="Conditional">else</span> ret = _time % <span class="Number">5</span>;
+<span id="L156" class="LineNr">156 </span>            <span class="Conditional">switch</span>(ret)
+<span id="L157" class="LineNr">157 </span>            {
+<span id="L158" class="LineNr">158 </span>                <span class="Label">case</span> <span class="Number">0</span> :
+<span id="L159" class="LineNr">159 </span>                    <span class="Conditional">if</span>(_hp &lt; _lionHp){
+<span id="L160" class="LineNr">160 </span>                        <span class="Conditional">if</span>(_hp &gt;= _dragonHp) _flag = <span class="Number">1</span>;
+<span id="L161" class="LineNr">161 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _ninjaHp) _flag = <span class="Number">2</span>;
+<span id="L162" class="LineNr">162 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _icemanHp) _flag = <span class="Number">3</span>;
+<span id="L163" class="LineNr">163 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _wolfHp) _flag = <span class="Number">4</span>;
+<span id="L164" class="LineNr">164 </span>                        <span class="Conditional">else</span> _flag = -<span class="Number">1</span>;
+<span id="L165" class="LineNr">165 </span>                    }<span class="Conditional">else</span>{
+<span id="L166" class="LineNr">166 </span>                        <span class="Function">CreateLion</span>();
+<span id="L167" class="LineNr">167 </span>                        _flag = -<span class="Number">2</span>;
+<span id="L168" class="LineNr">168 </span>                    }<span class="Statement">break</span>;
+<span id="L169" class="LineNr">169 </span>                <span class="Label">case</span> <span class="Number">1</span> :
+<span id="L170" class="LineNr">170 </span>                    <span class="Conditional">if</span>(_hp &lt; _dragonHp){
+<span id="L171" class="LineNr">171 </span>                        <span class="Conditional">if</span>(_hp &gt;= _ninjaHp) _flag = <span class="Number">2</span>;
+<span id="L172" class="LineNr">172 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _icemanHp) _flag = <span class="Number">3</span>;
+<span id="L173" class="LineNr">173 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _wolfHp) _flag = <span class="Number">4</span>;
+<span id="L174" class="LineNr">174 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _lionHp) _flag = <span class="Number">0</span>;
+<span id="L175" class="LineNr">175 </span>                        <span class="Conditional">else</span> _flag = -<span class="Number">1</span>;
+<span id="L176" class="LineNr">176 </span>                    }<span class="Conditional">else</span>{
+<span id="L177" class="LineNr">177 </span>                        <span class="Function">CreateDragon</span>();
+<span id="L178" class="LineNr">178 </span>                        _flag = -<span class="Number">2</span>;
+<span id="L179" class="LineNr">179 </span>                    }<span class="Statement">break</span>;
+<span id="L180" class="LineNr">180 </span>                <span class="Label">case</span> <span class="Number">2</span> :
+<span id="L181" class="LineNr">181 </span>                    <span class="Conditional">if</span>(_hp &lt; _ninjaHp){
+<span id="L182" class="LineNr">182 </span>                        <span class="Conditional">if</span>(_hp &gt;= _icemanHp) _flag = <span class="Number">3</span>;
+<span id="L183" class="LineNr">183 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _wolfHp) _flag = <span class="Number">4</span>;
+<span id="L184" class="LineNr">184 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _lionHp) _flag = <span class="Number">0</span>;
+<span id="L185" class="LineNr">185 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _dragonHp) _flag = <span class="Number">1</span>;
+<span id="L186" class="LineNr">186 </span>                        <span class="Conditional">else</span> _flag = -<span class="Number">1</span>;
+<span id="L187" class="LineNr">187 </span>                    }<span class="Conditional">else</span>{
+<span id="L188" class="LineNr">188 </span>                        <span class="Function">CreateNinja</span>();
+<span id="L189" class="LineNr">189 </span>                        _flag = -<span class="Number">2</span>;
+<span id="L190" class="LineNr">190 </span>                    }<span class="Statement">break</span>;
+<span id="L191" class="LineNr">191 </span>                <span class="Label">case</span> <span class="Number">3</span> :
+<span id="L192" class="LineNr">192 </span>                    <span class="Conditional">if</span>(_hp &lt; _icemanHp){
+<span id="L193" class="LineNr">193 </span>                        <span class="Conditional">if</span>(_hp &gt;= _wolfHp) _flag = <span class="Number">4</span>;
+<span id="L194" class="LineNr">194 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _lionHp) _flag = <span class="Number">0</span>;
+<span id="L195" class="LineNr">195 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _dragonHp) _flag = <span class="Number">1</span>;
+<span id="L196" class="LineNr">196 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _ninjaHp) _flag = <span class="Number">2</span>;
+<span id="L197" class="LineNr">197 </span>                        <span class="Conditional">else</span> _flag = -<span class="Number">1</span>;
+<span id="L198" class="LineNr">198 </span>                    }<span class="Conditional">else</span>{
+<span id="L199" class="LineNr">199 </span>                        <span class="Function">CreateIceman</span>();
+<span id="L200" class="LineNr">200 </span>                        _flag = -<span class="Number">2</span>;
+<span id="L201" class="LineNr">201 </span>                    }<span class="Statement">break</span>;
+<span id="L202" class="LineNr">202 </span>                <span class="Label">case</span> <span class="Number">4</span> :
+<span id="L203" class="LineNr">203 </span>                    <span class="Conditional">if</span>(_hp &lt; _wolfHp){
+<span id="L204" class="LineNr">204 </span>                        <span class="Conditional">if</span>(_hp &gt;= _lionHp) _flag = <span class="Number">0</span>;
+<span id="L205" class="LineNr">205 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _dragonHp) _flag = <span class="Number">1</span>;
+<span id="L206" class="LineNr">206 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _ninjaHp) _flag = <span class="Number">2</span>;
+<span id="L207" class="LineNr">207 </span>                        <span class="Conditional">else</span> <span class="Conditional">if</span>(_hp &gt;= _icemanHp) _flag = <span class="Number">3</span>;
+<span id="L208" class="LineNr">208 </span>                        <span class="Conditional">else</span> _flag = -<span class="Number">1</span>;
+<span id="L209" class="LineNr">209 </span>                    }<span class="Conditional">else</span>{
+<span id="L210" class="LineNr">210 </span>                        <span class="Function">CreateWolf</span>();
+<span id="L211" class="LineNr">211 </span>                        _flag = -<span class="Number">2</span>;
+<span id="L212" class="LineNr">212 </span>                    }<span class="Statement">break</span>;
+<span id="L213" class="LineNr">213 </span>            }
+<span id="L214" class="LineNr">214 </span>            <span class="Conditional">if</span>(_flag==-<span class="Number">1</span>){
+<span id="L215" class="LineNr">215 </span>                <span class="Function">printf</span>(<span class="String">&quot;</span>%03d<span class="String"> </span>%s<span class="String"> headquarter stops making warriors</span>\n<span class="String">&quot;</span>,_time,_color.<span class="Function">c_str</span>());
+<span id="L216" class="LineNr">216 </span>                _flag = -<span class="Number">3</span>;
+<span id="L217" class="LineNr">217 </span>            }
+<span id="L218" class="LineNr">218 </span>        }
+<span id="L219" class="LineNr">219 </span>    }
+<span id="L220" class="LineNr">220 </span>}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

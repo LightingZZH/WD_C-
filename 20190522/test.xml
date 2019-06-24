@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>   //声明该文档是xml文档
+<rss version="2.0"> //声明当前文件为rss格式文件
+<channel> 
+    <title>酷 壳 &#8211; CoolShell</title> 
+    <link>https://coolshell.cn</link>
+    <description>享受编程和技术所带来的快乐 - Coding Your Ambition</description>   
+    <item>
+        <title>HTTP API 认证授权术</title>
+        <link>https://coolshell.cn/articles/19395.html</link>
+        <description>description1</description>
+        <content:encoded></content:encoded>
+    </item>
+    <item>
+        <title>StackOverflow 2019 程序员调查</title>
+        <link>https://coolshell.cn/articles/19307.html</link>
+        <description>description2</description>
+        <content:encoded>content2</content:encoded>
+    </item>
+ </channel>
+ </rss>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/C++/WOW/test/test_wow2.cc.html</title>
+<meta name="Generator" content="Vim/8.1">
+<meta name="plugin-version" content="vim8.1_v1">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="number_lines,use_css,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
+<meta name="colorscheme" content="onedark">
+<style type="text/css">
+<!--
+pre { font-family: monospace; color: #afafaf; background-color: #262626; }
+body { font-family: monospace; color: #afafaf; background-color: #262626; }
+* { font-size: 1em; }
+.String { color: #87d787; }
+.Number { color: #d7875f; }
+.Repeat { color: #d75fd7; }
+.LineNr { color: #444444; }
+.Function { color: #00afff; }
+.Type { color: #d7af87; }
+.Include { color: #00afff; }
+.Typedef { color: #d7af87; }
+.Comment { color: #5f5f5f; }
+.Constant { color: #00afd7; }
+.Statement { color: #d75fd7; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  var lineElem = document.getElementById(lineNum);
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<pre id='vimCodeElement'>
+<span id="L1" class="LineNr"> 1 </span><span class="Include">#include </span><span class="String">&quot;wow2.h&quot;</span>
+<span id="L2" class="LineNr"> 2 </span><span class="Include">#include </span><span class="String">&lt;vector&gt;</span>
+<span id="L3" class="LineNr"> 3 </span><span class="Statement">using</span> <span class="Constant">std</span>::<span class="Typedef">vector</span>;
+<span id="L4" class="LineNr"> 4 </span><span class="Statement">using</span> <span class="Constant">std</span>::<span class="Constant">cin</span>;
+<span id="L5" class="LineNr"> 5 </span>
+<span id="L6" class="LineNr"> 6 </span><span class="Type">int</span> <span class="Function">main</span>()
+<span id="L7" class="LineNr"> 7 </span>{
+<span id="L8" class="LineNr"> 8 </span>    <span class="Type">int</span> cnt,Hp,hp1,hp2,hp3,hp4,hp5;
+<span id="L9" class="LineNr"> 9 </span>    <span class="Typedef">vector</span>&lt;<span class="Type">int</span>&gt; hHp;
+<span id="L10" class="LineNr">10 </span>    <span class="Typedef">vector</span>&lt;<span class="Typedef">vector</span>&lt;<span class="Type">int</span>&gt;&gt; wHp;
+<span id="L11" class="LineNr">11 </span>    <span class="Constant">cin</span>&gt;&gt;cnt;
+<span id="L12" class="LineNr">12 </span>
+<span id="L13" class="LineNr">13 </span>    <span class="Repeat">for</span>(<span class="Type">int</span> i=<span class="Number">0</span>;i!=cnt;++i)
+<span id="L14" class="LineNr">14 </span>    {
+<span id="L15" class="LineNr">15 </span>        <span class="Typedef">vector</span>&lt;<span class="Type">int</span>&gt; v;
+<span id="L16" class="LineNr">16 </span>        <span class="Constant">cin</span>&gt;&gt;Hp&gt;&gt;hp1&gt;&gt;hp2&gt;&gt;hp3&gt;&gt;hp4&gt;&gt;hp5;
+<span id="L17" class="LineNr">17 </span>        hHp.<span class="Function">push_back</span>(Hp);
+<span id="L18" class="LineNr">18 </span>        v.<span class="Function">push_back</span>(hp1);
+<span id="L19" class="LineNr">19 </span>        v.<span class="Function">push_back</span>(hp2);
+<span id="L20" class="LineNr">20 </span>        v.<span class="Function">push_back</span>(hp3);
+<span id="L21" class="LineNr">21 </span>        v.<span class="Function">push_back</span>(hp4);
+<span id="L22" class="LineNr">22 </span>        v.<span class="Function">push_back</span>(hp5);
+<span id="L23" class="LineNr">23 </span>        wHp.<span class="Function">push_back</span>(v);
+<span id="L24" class="LineNr">24 </span>    }
+<span id="L25" class="LineNr">25 </span>
+<span id="L26" class="LineNr">26 </span>    <span class="Repeat">for</span>(<span class="Type">int</span> i=<span class="Number">0</span>;i!=cnt;i++)
+<span id="L27" class="LineNr">27 </span>    {
+<span id="L28" class="LineNr">28 </span>        <span class="Comment">//cout&lt;&lt;&quot;----------------&quot;&lt;&lt;endl;</span>
+<span id="L29" class="LineNr">29 </span>        <span class="Constant">cout</span>&lt;&lt;<span class="String">&quot;Case:&quot;</span>&lt;&lt;i+<span class="Number">1</span>&lt;&lt;<span class="Function">endl</span>;
+<span id="L30" class="LineNr">30 </span>        <span class="Comment">//cout&lt;&lt;hHp[i]&lt;&lt;endl;</span>
+<span id="L31" class="LineNr">31 </span>        <span class="Comment">//cout&lt;&lt;wHp[i][0]&lt;&lt;&quot; &quot;&lt;&lt;wHp[i][1]&lt;&lt;&quot; &quot;&lt;&lt;wHp[i][2]&lt;&lt;&quot; &quot;</span>
+<span id="L32" class="LineNr">32 </span>        <span class="Comment">//    &lt;&lt;wHp[i][3]&lt;&lt;&quot; &quot;&lt;&lt;wHp[i][4]&lt;&lt;endl;</span>
+<span id="L33" class="LineNr">33 </span>        Headquarter <span class="Function">h1</span>(hHp[i],<span class="String">&quot;red&quot;</span>,wHp[i][<span class="Number">0</span>],wHp[i][<span class="Number">1</span>],wHp[i][<span class="Number">2</span>],wHp[i][<span class="Number">3</span>],wHp[i][<span class="Number">4</span>]);
+<span id="L34" class="LineNr">34 </span>        Headquarter <span class="Function">h2</span>(hHp[i],<span class="String">&quot;blue&quot;</span>,wHp[i][<span class="Number">0</span>],wHp[i][<span class="Number">1</span>],wHp[i][<span class="Number">2</span>],wHp[i][<span class="Number">3</span>],wHp[i][<span class="Number">4</span>]);
+<span id="L35" class="LineNr">35 </span>        <span class="Repeat">while</span>(h1.<span class="Function">getFlag</span>()!=-<span class="Number">3</span> || h2.<span class="Function">getFlag</span>()!=-<span class="Number">3</span>)
+<span id="L36" class="LineNr">36 </span>        {
+<span id="L37" class="LineNr">37 </span>            h1.<span class="Function">Create</span>();
+<span id="L38" class="LineNr">38 </span>            h2.<span class="Function">Create</span>();
+<span id="L39" class="LineNr">39 </span>        }
+<span id="L40" class="LineNr">40 </span>    }
+<span id="L41" class="LineNr">41 </span>
+<span id="L42" class="LineNr">42 </span>    <span class="Statement">return</span> <span class="Number">0</span>;
+<span id="L43" class="LineNr">43 </span>}
+<span id="L44" class="LineNr">44 </span>
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

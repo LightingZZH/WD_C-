@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <sys/time.h>
 using std::cout;
 using std::endl;
 using std::string;
@@ -88,8 +89,12 @@ int main()
 {
     string filename="/home/zzh/C++/20190516/The_Holy_Bible.txt";
     Dictionary dic;
+    struct timeval start,end;
+    gettimeofday(&start,NULL);
     dic.read(filename);
     dic.store("word_count.txt");
+    gettimeofday(&end,NULL);
+    cout<<(end.tv_sec-start.tv_sec)*1000000+end.tv_usec-start.tv_usec<<endl;
     return 0;
 }
 

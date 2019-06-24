@@ -1,0 +1,80 @@
+#include "Threadpool.h"
+#include "TcpServer.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
+Threadpool * gThreadpool = nullptr;
+
+class MyTask
+{
+public:
+    MyTask(const string & msg, const TcpConnectionPtr & conn)
+    : _msg(msg)
+    , _conn(conn)
+    {}
+
+    //运行在线程池的某个子线程中
+    void process()
+    {
+        string response = _msg;
+        _conn->sendInLoop(response);
+    }
+private:
+    string _msg;
+    TcpConnectionPtr _conn;
+};
+
+void onConnection(const TcpConnectionPtr & conn)
+{
+    cout<<conn->toString()<<" has connected!"<<endl;
+    conn->send("welcome to server.");
+}
+
+void onMessage(const TcpConnectionPtr & conn)
+{
+    cout<<"onMessage..."<<endl;
+    string msg = conn->receive();
+    cout<<">> receive msg from client: "<<msg<<endl;
+    MyTask task(msg, conn);
+    gThreadpool->addTask(bind(&MyTask::process,task));
+}
+
+void onClose(const TcpConnectionPtr & conn)
+{
+    cout<<"onClose..."<<endl;
+    cout<<conn->toString()<<" has closed!"<<endl;
+}
+
+class EchoServer
+{
+public:
+    void onConnection(const TcpConnectionPtr & conn);
+    void onMessage(const TcpConnectionPtr & conn);
+    void onClose(const TcpConnectionPtr & conn);
+
+    void process(); //业务逻辑的处理，不知道干嘛的
+
+private:
+    Threadpool _threadpool;
+    TcpServer _server;
+};
+
+int main()
+{
+    Threadpool threadpool(4, 10);
+    threadpool.start();
+
+    gThreadpool = &threadpool;
+
+    TcpServer server("192.168.3.155", 2000);
+
+    server.setConnectionCallback(onConnection);
+    server.setMessageCallback(onMessage);
+    server.setCloseCallback(onClose);
+
+    server.start();
+
+    return 0;
+}
