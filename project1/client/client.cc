@@ -3,10 +3,17 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
+#include <json/json.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <string>
+#include <iostream>
+using std::string;
+using std::cout;
+using std::endl;
+
 #define ERR_EXIT(m) \
     do{ \
         perror(m);\
@@ -32,7 +39,20 @@ void do_service(int sockfd)
             close(sockfd);
             exit(EXIT_SUCCESS);
         }
-        printf("receive msg : %s\n",recvbuf);
+        printf("receive msg: %s", recvbuf);
+
+        Json::Value value;
+        Json::Reader reader;
+
+        if(reader.parse(string(recvbuf), value)){
+            for(int i = 1; i<=3; ++i){
+                string idx = "候选词"+string(1, '0'+i);
+                if(!value[idx].empty()){
+                    cout<<value[idx].asString()<<" ";
+                }else break;
+            }
+            cout<<endl;
+        }
 
         memset(recvbuf, 0, sizeof(recvbuf));
         memset(sendbuf, 0, sizeof(sendbuf));

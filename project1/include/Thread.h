@@ -11,8 +11,8 @@ class Thread
 : Noncopyable
 {
 public:
-    using ThreadCallback = std::function<void(int)>;
-    Thread(ThreadCallback && cb, int cnt = -1);
+    using ThreadCallback = std::function<void()>;
+    Thread(ThreadCallback && cb, int cnt);
     ~Thread();
 
     void start();

@@ -61,7 +61,7 @@ size_t minDistance(string & word1, string & word2)
 
 int main()
 {
-    string word1("中国人");
+    string word1("");
     string word2("中心");
     cout<<word1<<endl;
     cout<<word2<<endl;

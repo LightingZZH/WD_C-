@@ -1,4 +1,4 @@
-#include "Mydict.h"
+#include "../include/Mydict.h"
 #include <fstream>
 #include <sstream>
 

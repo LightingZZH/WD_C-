@@ -1,38 +1,24 @@
 #include "../include/Thread.h"
+#include "../include/redis.h"
+#include <hiredis/hiredis.h>
 #include <stdio.h>
 #include <errno.h>
 #include <iostream>
 using std::cout;
 using std::endl;
 
-__thread int threadCnt;
+extern __thread Redis* redis;
 
-using ThreadCallback = std::function<void(int)>;
-
-struct ThreadData
-{
-    int _cnt;
-    ThreadCallback _cb;
-
-    ThreadData(int cnt, ThreadCallback cb)
-    : _cnt(cnt)
-    , _cb(cb)
-    {}
-
-    void runInThread()
-    {
-        threadCnt = _cnt;
-         if(_cb)
-            _cb(threadCnt);
-    }
-};
+using ThreadCallback = std::function<void()>;
 
 Thread::Thread(ThreadCallback && cb, int cnt)
 : _pthid(0)
 , _cb(move(cb))
 , _isRunning(false)
 , _cnt(cnt)
-{}
+{
+    cout<<"Thread() "<<_cnt<<endl;
+}
 
 Thread::~Thread()
 {
@@ -45,8 +31,7 @@ Thread::~Thread()
 
 void Thread::start()
 {
-    ThreadData * data = new ThreadData(_cnt, _cb);
-    if(pthread_create(&_pthid, nullptr, threadFunc, data)){
+    if(pthread_create(&_pthid, nullptr, threadFunc, this)){
         perror("pthread_create");
         return;
     }
@@ -63,9 +48,12 @@ void Thread::join()
 
 void* Thread::threadFunc(void* arg)
 {
-    ThreadData* pdata = static_cast<ThreadData*>(arg);
-    if(pdata)
-        pdata->runInThread();
-    delete pdata;
+    Thread* pthread = static_cast<Thread*>(arg);
+    threadCnt = pthread->_cnt;
+    redis = new Redis();
+    redis->connect("127.0.0.1", 6379);
+    if(pthread)
+        pthread->_cb();
+    delete redis;
     return nullptr;
 }

@@ -1,6 +1,5 @@
 #include "../include/Threadpool.h"
 #include <unistd.h>
-using std::placeholders::_1;
 
 Threadpool::Threadpool(size_t threadNum, size_t queSize)
 : _threadNum(threadNum)
@@ -15,7 +14,7 @@ void Threadpool::start()
 {
     for(size_t idx = 0; idx!=_threadNum; ++idx){
         unique_ptr<Thread> thread(new Thread(
-            std::bind(&Threadpool::threadFunc, this, _1), idx
+            std::bind(&Threadpool::threadFunc, this), idx
         ));
         _threads.push_back(move(thread));
     }
@@ -49,12 +48,12 @@ Task Threadpool::getTask()
     return _que.pop();
 }
 
-void Threadpool::threadFunc(int cnt)
+void Threadpool::threadFunc()
 {
     while(!_isExit){
         Task task = getTask();
         if(task){
-            task(cnt);
+            task();
         }
     }
 }

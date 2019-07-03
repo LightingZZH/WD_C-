@@ -53,7 +53,7 @@ int SocketIO::readline(char *buff, int maxlen)
                 int sz = idx + 1;
                 readn(p, sz);
                 total += sz;
-                p += sz;
+                p += sz-1;
                 *p = '\0';
                 return total;
             }

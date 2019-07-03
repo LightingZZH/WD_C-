@@ -1,5 +1,13 @@
-#include "MyTask.h"
-#include "Mydict.h"
+#include "../include/MyTask.h"
+#include "../include/Mydict.h"
+#include "../include/redis.h"
+#include <json/json.h>
+#include <hiredis/hiredis.h>
+#include <bitset>
+#define MAX 3
+
+__thread int threadCnt;
+__thread Redis* redis;
 
 size_t MyTask::nBytesCode(const char ch)
 {
@@ -58,29 +66,40 @@ size_t MyTask::minDistance(string & word1, string & word2)
     return ed[size1][size2];
 }
 
-void MyTask::process(int cnt)
+void MyTask::process()
 {
-    Cache cache = _cacheManager.getCache(cnt);
-    string ret = cache.getResult(_msg);
+    string ret = redis->get(_msg);
     if(!ret.size()){
+        cout<< "thread "<<threadCnt<<" 缓存未命中"<<endl;
         vector<pair<string, int>> dict = Mydict::getInstance()->getDict();
         unordered_map<string, set<int>> index = Mydict::getInstance()->getIndex();
+        bitset<50000> bst;
         for(size_t idx = 0; idx!=_msg.size(); ++idx){
             size_t nBytes = nBytesCode(_msg[idx]);
             string s = _msg.substr(idx, nBytes);
             for(auto & idx : index[s]){
-               string word = dict[idx].first;
-               int frequence = dict[idx].second;
-               int Distance = minDistance(_msg, word);
-               _resultQue.push(MyResult(word, frequence, Distance));
+                if(bst[idx]) continue;
+                bst.set(idx);
+                string word = dict[idx].first;
+                int frequence = dict[idx].second;
+                int Distance = minDistance(_msg, word);
+                _resultQue.push(MyResult(word, frequence, Distance));
             }
         }
-        int cnt = 0;
-        while(!_resultQue.empty() && cnt < 3){
-            ret = ret + _resultQue.top()._word + " ";
-            ++cnt;
+        Json::Value words;
+        Json::FastWriter writer;
+        int num = 0;
+        cout<<"-----MyTask------"<<endl;
+        while(!_resultQue.empty() && num < MAX){
+            ++num;
+            string idx = "候选词"+string(1, '0'+num); 
+            words[idx] = _resultQue.top()._word;
+            _resultQue.pop();
         }
-        cache.addElement(_msg, ret);
+        ret = writer.write(words);
+        redis->set(_msg, ret);
+    }else{
+        cout<<"thread "<<threadCnt<<" 缓存命中"<<endl;
     }
     _conn->sendInLoop(ret);
 }
